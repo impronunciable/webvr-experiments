@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v2.5.2/dist/aframe-extras.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe-template-component/master/dist/aframe-template-component.min.js"></script>
+    <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.min.js"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-asset-item id="house" src="models/obj_house3.dae"></a-asset-item>
+        <a-asset-item id="scene-hazmat" src="models/scene_hazmat.dae"></a-asset-item>
+        <a-asset-item id="scene-protest" src="models/scene_protest.dae"></a-asset-item>
+        <a-asset-item id="scene-store" src="models/scene_store.dae"></a-asset-item>
+        <a-asset-item id="tree" src="models/obj_tree1.dae"></a-asset-item>
+        <script id="forest" type="text/x-nunjucks-template">
+          {% for x in range(-5, 5) %}
+            {% for z in range(-5, 5) %}
+              <a-entity collada-model="#tree" position="{{ x * 5 }} 0 {{ z * 5 }}"></a-entity>
+            {% endfor %}
+          {% endfor %}
+        </script>
+
+        <audio src="audio.mp3" autoplay loop preload="none" />
+      </a-assets>
+
+      <a-entity position="0 1.4 6"
+        bmfont-text="align: center; width: 500; color: #333; text: Hi there :) I'm just playing around with A-Frame and some great @mikelovesrobots Voxels. You can move around with the AWSD keys on desktop and touching the screen on mobile. Look around and enjoy!"></a-entity>
+
+      <a-entity position="-6 0 2" collada-model="#house"></a-entity>
+      <a-entity position="0 0 20" collada-model="#scene-hazmat"></a-entity>
+      <a-entity position="15 0 5" rotation="0 90 0" collada-model="#scene-protest"></a-entity>
+      <a-entity position="-20 0 15" rotation="0 90 0" collada-model="#scene-store"></a-entity>
+
+      <a-entity position="0 0 50" template="src: #forest"></a-entity>
+
+
+      <a-entity camera universal-controls position="0 1.6 8"></a-entity>
+      <a-sky color="skyblue"></a-sky>
+      <a-plane rotation="-90 0 0" color="#666666" position="0 0 45" width="100" height="100"></a-plane>
+      <a-ocean  width="100" depth="40" position="0 -1 -20" density="30" speed="2"></a-ocean>
+
+      <a-light type="ambient" color="#ccc"></a-light>
+      <a-light color="#ddf" distance="100" intensity="0.4" type="point"></a-light>
+      <a-light color="#ddf" position="3 10 -10" distance="50" intensity="0.4" type="point"></a-light>
+    </a-scene>
+  </body>
+</html>
